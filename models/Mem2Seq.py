@@ -296,12 +296,13 @@ class Mem2Seq(nn.Module):
                     else: st+= e + ' '
                 temp_gen.append(st)
                 correct = data_dev[7][i] 
-                if PrintTest:
-                    print('Viewing the data??:\n\n result\n{} \nCorrect:\n{}.format(st, correct))
-                    PrintTest =False
                 ### compute F1 SCORE  
                 st = st.lstrip().rstrip()
                 correct = correct.lstrip().rstrip()
+#                 if PrintTest:
+#                     print(st)
+#                     print('Viewing the data??:\n\n result\n{} \nCorrect:\n{}.format(st, correct))
+#                     PrintTest =False
                 if args['dataset']=='kvr':
                     f1_true,count = self.compute_prf(data_dev[8][i], st.split(), global_entity_list, data_dev[14][i])
                     microF1_TRUE += f1_true
@@ -331,9 +332,11 @@ class Mem2Seq(nn.Module):
                 else:
                     if (correct == st):
                         acc+=1
-                #    print("Correct:"+str(correct))
-                #    print("\tPredict:"+str(st))
-                #    print("\tFrom:"+str(self.from_whichs[:,i]))
+                    if PrintTest:
+                        print("Correct:"+str(correct))
+                        print("\tPredict:"+str(st))
+                        print("\tFrom:"+str(self.from_whichs[:,i]))
+                        PrintTest = False
 
                 w += wer(correct,st)
                 ref.append(str(correct))

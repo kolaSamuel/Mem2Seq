@@ -330,7 +330,7 @@ class Mem2Seq(nn.Module):
                         acc+=1
                     print("Correct:"+str(correct))
                     print("\tPredict:"+str(st))
-                    print("\tFrom:"+str(self.from_whichs[:,i]))
+#                     print("\tFrom:"+str(self.from_whichs[:,i]))
 
                 w += wer(correct,st)
                 ref.append(str(correct))

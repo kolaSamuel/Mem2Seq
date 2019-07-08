@@ -244,6 +244,7 @@ class Mem2Seq(nn.Module):
 
 
     def evaluate(self,dev,avg_best,BLEU=False):
+        PrintTest = True
         logging.info("STARTING EVALUATION")
         acc_avg = 0.0
         wer_avg = 0.0
@@ -294,7 +295,10 @@ class Mem2Seq(nn.Module):
                     if e== '<EOS>': break
                     else: st+= e + ' '
                 temp_gen.append(st)
-                correct = data_dev[7][i]  
+                correct = data_dev[7][i] 
+                if PrintTest:
+                    print('Viewing the data??:\n\n result\n{} \nCorrect:\n{}.format(st, correct))
+                    PrintTest =False
                 ### compute F1 SCORE  
                 st = st.lstrip().rstrip()
                 correct = correct.lstrip().rstrip()
